@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mini_mercado {
-	
+		
 	private List<Client> clients;
 	
 	public Mini_mercado() {
@@ -12,7 +12,7 @@ public class Mini_mercado {
 		clients = new ArrayList<Client>();
 	}
 	
-	public boolean add(TypeofDocument documentType, long idNumber) {
+	public boolean addClient(String documentType, long idNumber) {
 		boolean e = false;
 		Client cl = new Client(documentType, idNumber);
 		for (int i = 0; i < clients.size() && !e; i++) {
