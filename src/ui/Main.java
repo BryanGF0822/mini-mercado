@@ -1,14 +1,10 @@
 package ui;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
-import model.Mini_mercado;
+import model.*;
 
-enum TypeofDocument{
-	
-	TARJETA_DE_IDENTIDAD, CEDULA_DE_CIUDADANIA, 
-	PASAPORTE, CEDULA_DE_EXTRANJERIA
-}
 
 public class Main {
 	
@@ -16,14 +12,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		TypeofDocument t1 = TypeofDocument.CEDULA_DE_CIUDADANIA;
-		TypeofDocument t2 = TypeofDocument.TARJETA_DE_IDENTIDAD;
-		TypeofDocument t3 = TypeofDocument.PASAPORTE;
-		TypeofDocument t4 = TypeofDocument.CEDULA_DE_EXTRANJERIA;
-
-
+		control = new Mini_mercado();
+		
 		Scanner sn = new Scanner(System.in);
-
+		
+		int contador = 0;
 		boolean exit = false;
 		int option;
 
@@ -50,22 +43,34 @@ public class Main {
 					System.out.println("4. Cedula de extranjeria");
 					
 					int op = Integer.parseInt(sn.nextLine());
-					TypeofDocument documentType;
+					TypeofDocument documentType = null;
 					
 					if(op == 1) {
-						documentType = t1;
+						documentType = TypeofDocument.CEDULA_DE_CIUDADANIA;
 					}else if(op == 2) {
-						documentType = t2;
+						documentType = TypeofDocument.TARJETA_DE_IDENTIDAD;
 					}else if(op == 3) {
-						documentType = t3;
+						documentType = TypeofDocument.PASAPORTE;
 					}else if(op == 4) {
-						documentType = t4;
+						documentType = TypeofDocument.CEDULA_DE_EXTRANJERIA;
 					}
 					
 					System.out.println("Digite su numero de documento:");
 					long idNumber = Long.parseLong(sn.nextLine());
 					
-					control.addClient(documentType, idNumber);
+					String s = "";
+					int i =s.length();
+					String c = s.charAt(i-1)+"";
+					int j = Integer.parseInt(c);
+					
+					if(documentType == TypeofDocument.TARJETA_DE_IDENTIDAD || puedeIngresar(j) == false) {
+						System.out.println("Este cliente no puede ingresar hoy :)");
+					}else {
+						control.addClient(documentType, idNumber);
+					}
+					
+					contador++;
+					
 					
 					break;
 				case 2:
@@ -84,6 +89,22 @@ public class Main {
 
 		}
 
+	}
+
+	private static boolean puedeIngresar(int j) {
+		boolean retorno = false;
+		LocalDate ld = LocalDate.now();
+		int dia = ld.getDayOfMonth();
+		if (j%2 == 0) {
+			if (!(dia%2==0)) {
+				retorno = true;
+			}
+		}else {
+			if (dia%2==0) {
+				retorno = true;
+			}
+		}
+		return retorno;
 	}
 
 }

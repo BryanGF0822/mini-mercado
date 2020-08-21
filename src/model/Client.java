@@ -1,19 +1,17 @@
 package model;
 
-
-
 public class Client {
 	
-	private String documentType;
+	private TypeofDocument documentType;
 	private long idNumber;
 	
-	public Client(String documentType, long idNumber) {
+	public Client(TypeofDocument documentType, long idNumber) {
 		
 		this.documentType = documentType;
 		this.idNumber = idNumber;
 	}
 
-	public String getDocumentType() {
+	public TypeofDocument getDocumentType() {
 		return documentType;
 	}
 
