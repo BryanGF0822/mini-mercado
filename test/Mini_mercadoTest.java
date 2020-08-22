@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import Exceptions.IdNumberException;
 import Exceptions.TarjetaDeIdentidadException;
-import model.Client;
 import model.Mini_mercado;
 import model.TypeofDocument;
 

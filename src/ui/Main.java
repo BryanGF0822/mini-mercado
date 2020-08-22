@@ -62,7 +62,7 @@ public class Main {
 					String s = String.valueOf(idNumber);
 					int i =s.length();
 					String c = s.charAt(i-2)+"";
-					int j = Integer.parseInt(c);//5
+					int j = Integer.parseInt(c);
 					
 //					if(documentType == TypeofDocument.TARJETA_DE_IDENTIDAD || puedeIngresar(j) == false) {
 //						System.out.println("Este cliente no puede ingresar hoy :)");
@@ -111,7 +111,7 @@ public class Main {
 				sn.hasNext();
 			}
 			
-			System.out.println(control.getClients().size());
+			//System.out.println(control.getClients().size());
 
 		}
 		sn.close();
