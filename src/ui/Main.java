@@ -1,8 +1,9 @@
 package ui;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
+import Exceptions.IdNumberException;
+import Exceptions.TarjetaDeIdentidadException;
 import model.*;
 
 
@@ -26,7 +27,7 @@ public class Main {
 			System.out.println("");
 			System.out.println("1. Agregar nuevo usuario para ingreso.");
 			System.out.println("2. Consultar cantidad de usuarios que intentaron entrar.");
-			System.out.println("3. Salir");
+			System.out.println("3. Salir :D");
 			System.out.println("");
 
 			try {
@@ -58,15 +59,37 @@ public class Main {
 					System.out.println("Digite su numero de documento:");
 					long idNumber = Long.parseLong(sn.nextLine());
 					
-					String s = "";
+					String s = Long.toString(idNumber);
 					int i =s.length();
 					String c = s.charAt(i-1)+"";
-					int j = Integer.parseInt(c);
+					int j = Integer.parseInt(c);//5
 					
-					if(documentType == TypeofDocument.TARJETA_DE_IDENTIDAD || puedeIngresar(j) == false) {
-						System.out.println("Este cliente no puede ingresar hoy :)");
-					}else {
-						control.addClient(documentType, idNumber);
+//					if(documentType == TypeofDocument.TARJETA_DE_IDENTIDAD || puedeIngresar(j) == false) {
+//						System.out.println("Este cliente no puede ingresar hoy :)");
+//					}else {
+//						control.addClient(documentType, idNumber);
+//					}
+					
+					boolean confirmacionPaso2 = false;
+					try {
+						
+						control.puedeIngresar(j);
+						confirmacionPaso2 = true;
+						
+					}catch(IdNumberException e){
+						
+						e.getMessage();
+					}
+					
+					if(confirmacionPaso2 == true) {
+						
+						try {
+							control.addClient(documentType, idNumber);
+							
+						}catch(TarjetaDeIdentidadException e) {
+							
+							e.getMessage();
+						}
 					}
 					
 					contador++;
@@ -74,6 +97,7 @@ public class Main {
 					
 					break;
 				case 2:
+					System.out.println("El numero de usuarios que intentaron entrar es: " + contador);
 					break;
 				case 3:
 					exit = true;
@@ -86,25 +110,27 @@ public class Main {
 				System.out.println("Debes insertar un numero");
 				sn.hasNext();
 			}
+			
+			System.out.println(control.getClients().size());
 
 		}
-
+		sn.close();
 	}
 
-	private static boolean puedeIngresar(int j) {
-		boolean retorno = false;
-		LocalDate ld = LocalDate.now();
-		int dia = ld.getDayOfMonth();
-		if (j%2 == 0) {
-			if (!(dia%2==0)) {
-				retorno = true;
-			}
-		}else {
-			if (dia%2==0) {
-				retorno = true;
-			}
-		}
-		return retorno;
-	}
+//	private static boolean puedeIngresar(int j) {
+//		boolean retorno = false;
+//		LocalDate ld = LocalDate.now();
+//		int dia = ld.getDayOfMonth();
+//		if (j%2 == 0) {
+//			if (!(dia%2==0)) {
+//				retorno = true;
+//			}
+//		}else {
+//			if (dia%2==0) {
+//				retorno = true;
+//			}
+//		}
+//		return retorno;
+//	}
 
 }
