@@ -18,7 +18,6 @@ public class Mini_mercado {
 	
 	public void addClient(TypeofDocument documentType, long idNumber) throws TarjetaDeIdentidadException {
 		
-		boolean e = false;
 		Client cl = new Client(documentType, idNumber);
 		
 		if(documentType == TypeofDocument.TARJETA_DE_IDENTIDAD) {
@@ -26,14 +25,7 @@ public class Mini_mercado {
 			throw new TarjetaDeIdentidadException("Tarjeta de Identidad");
 			
 		}else {
-			
-			for (int i = 0; i < clients.size() && !e; i++) {
-				if (clients.get(i) == null) {
-					clients.add(i,cl);
-					e = true; 
-				}
-			}
-		
+					clients.add(cl);
 		}
 		
 	}

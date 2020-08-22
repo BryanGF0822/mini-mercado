@@ -59,9 +59,9 @@ public class Main {
 					System.out.println("Digite su numero de documento:");
 					long idNumber = Long.parseLong(sn.nextLine());
 					
-					String s = Long.toString(idNumber);
+					String s = String.valueOf(idNumber);
 					int i =s.length();
-					String c = s.charAt(i-1)+"";
+					String c = s.charAt(i-2)+"";
 					int j = Integer.parseInt(c);//5
 					
 //					if(documentType == TypeofDocument.TARJETA_DE_IDENTIDAD || puedeIngresar(j) == false) {
@@ -78,7 +78,7 @@ public class Main {
 						
 					}catch(IdNumberException e){
 						
-						e.getMessage();
+						System.out.println(e.getMessage());
 					}
 					
 					if(confirmacionPaso2 == true) {
@@ -88,7 +88,7 @@ public class Main {
 							
 						}catch(TarjetaDeIdentidadException e) {
 							
-							e.getMessage();
+							System.out.println( e.getMessage());
 						}
 					}
 					
