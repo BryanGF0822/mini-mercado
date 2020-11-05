@@ -108,7 +108,7 @@ public class Main {
 			} catch (NumberFormatException e) {
 				
 				System.out.println("Debes insertar un numero");
-				sn.hasNext();
+				sn.nextLine();
 			}
 			
 			//System.out.println(control.getClients().size());
